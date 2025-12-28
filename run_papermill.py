@@ -81,7 +81,7 @@ pm.execute_notebook(
         BASKET_BOOL_PATH="data/processed/basket_bool.parquet",
         RULES_OUTPUT_PATH="data/processed/rules_fpgrowth_filtered.csv",
 
-        MIN_SUPPORT=0.02,
+        MIN_SUPPORT=0.01,
         MAX_LEN=3,
 
         METRIC="lift",
@@ -127,7 +127,7 @@ pm.execute_notebook(
     "notebooks/runs/clustering_from_rules_run.ipynb",
     parameters=dict(
         CLEANED_DATA_PATH="data/processed/cleaned_uk_data.csv",
-        RULES_INPUT_PATH="data/processed/rules_apriori_filtered.csv",
+        RULES_INPUT_PATH="data/processed/rules_fpgrowth_filtered.csv",
 
         TOP_K_RULES=200,
         SORT_RULES_BY="lift",
@@ -135,7 +135,7 @@ pm.execute_notebook(
         MIN_ANTECEDENT_LEN=2,
         USE_RFM=True,
         RFM_SCALE=True,
-        RULE_SCALE=True,
+        RULE_SCALE=False,
 
         K_MIN=2,
         K_MAX=10,
