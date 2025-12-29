@@ -67,11 +67,40 @@ Từ tập luật đã lọc, nhóm:
 
 ---
 
+
+
 ## 2. Feature Engineering cho phân cụm
 
 Nhóm xây dựng **hai biến thể đặc trưng** để so sánh.
 
 ### 2.1 Biến thể 1 – Baseline (Rule-based Binary Features)
+
+**Cấu hình:**
+
+```bash
+RULE_FEATURE_TYPE=binary   # chỉ đánh dấu có / không thỏa luật
+TOP_K_RULES=200
+USE_RFM=false
+RFM_SCALE=false
+RULE_SCALE=false
+MIN_ANTECEDENT_LEN=2
+```
+
+**Không gian đặc trưng:**
+
+* Shape X: **(3921 × 175)**
+* Chỉ sử dụng rule-features dạng nhị phân
+
+**Kết quả phân cụm:**
+
+* Silhouette cao nhất tại **k = 2**, score ≈ **0.56**
+* Phân tách được nhóm mua nhiều và mua ít, nhưng mức độ chưa rõ ràng
+
+---
+
+### 2.2 Biến thể 2 – Rule + RFM (Weighted Features)
+
+Đây là **biến thể được lựa chọn chính thức** cho các bước phân tích tiếp theo.
 
 **Cấu hình:**
 
@@ -87,25 +116,34 @@ MIN_ANTECEDENT_LEN=2
 **Không gian đặc trưng:**
 
 * Shape X: **(3921 × 203)**
-* Rule-features chiếm ưu thế, RFM bổ trợ giá trị khách hàng
-
+* Rule-features có trọng số + RFM chuẩn hóa
+  
 **Kết quả phân cụm:**
 
 * Silhouette cao nhất tại **k = 2**, score ≈ **0.96**
-* Phát hiện rõ nhóm khách hàng giá trị cao (VIP)
+* Phân tách được nhóm mua nhiều và mua ít, phân cụm rõ ràng
+  
+**Ưu điểm:**
+
+* Giữ được cường độ hành vi mua kèm (thông qua lift & confidence)
+* Kết hợp giá trị khách hàng (RFM) → tăng khả năng diễn giải
+* Phù hợp cho profiling & marketing action
 
 ---
 
-## 3. Lựa chọn số cụm K
+## 3. Lựa chọn số cụm K (Sử dụng biến thể 2 – Rule + RFM)
 
-Nhóm khảo sát K từ **2 → 10** bằng **Silhouette score**.
+Nhóm khảo sát K từ **2 → 10** bằng **Silhouette score** trên **biến thể 2 (Rule + RFM)**.
 
-* Baseline: silhouette tối đa ≈ 0.56 tại k = 2
-* Rule + RFM: silhouette tối đa ≈ 0.96 tại k = 2
+**Kết quả:**
+
+* Silhouette tối đa ≈ **0.96** tại **k = 2**
+* Các giá trị k lớn hơn cho silhouette giảm mạnh
 
 👉 **Chọn k = 2** vì:
 
-* Silhouette cao nhất
+* Silhouette cao vượt trội
+* Cụm tách biệt rõ ràng trên PCA
 * Các cụm có **ý nghĩa hành động marketing rõ ràng** (VIP vs Mass)
 
 ---
