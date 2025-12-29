@@ -215,6 +215,10 @@ Nhóm khảo sát K từ **2 → 10** bằng **Silhouette score** trên **biến
 * Chăm sóc riêng, ưu đãi độc quyền
 
 ---
+## 7.Dashboard Streamlit
+
+<img width="1919" height="909" alt="image" src="https://github.com/user-attachments/assets/68dd576b-1a5e-4c9e-aec0-bdca64ec09da" />
+
 
 ## Project Structure
 ```text
@@ -252,7 +256,7 @@ SHOP_CLUSTER/
 │       ├── apriori_library.cpython-312.pyc
 │       ├── cluster_library.cpython-310.pyc
 │       └── cluster_library.cpython-311.pyc
-│
+│── Dashboard.py
 ├── run_papermill.py
 ├── requirements.txt
 ├── README.md
