@@ -1,7 +1,7 @@
 # README – Phân khúc khách hàng dựa trên Luật kết hợp & RFM
 ## 👥 Thông tin Nhóm
 
-- **Nhóm:** Nhóm 9
+- **Nhóm:** Nhóm 5
 - **Thành viên:**
   - Nguyễn Nam Cường
   - Nguyễn Văn Đạt
